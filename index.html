@@ -3,116 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timed Google Form Quiz</title>
+    <title>سامانه آزمون آنلاین | ورود</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0; /* Changed from 20px to 0 for full width */
-        padding: 20px; /* Added padding to body instead */
-        background-color: #f0f0f0;
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* This is key: centers all child elements */
-        min-height: 100vh;
-        box-sizing: border-box;
-    }
-    #timer-container {
-        text-align: center;
-        margin: 20px auto; /* 'auto' for left/right centering */
-        padding: 15px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        width: 90%; /* Use percentage width */
-        max-width: 800px; /* Increased max-width for better balance */
-    }
-    #timer {
-        font-size: 2.5em;
-        font-weight: bold;
-        color: #d9534f;
-    }
-    #form-container {
-        margin: 20px auto;
-        width: 90%; /* Match the width of the timer-container */
-        max-width: 800px; /* Match the max-width of the timer-container */
-        display: flex;
-        justify-content: center;
-    }
-    /* NEW STYLE FOR THE IFRAME ITSELF */
-    #form-container iframe {
-        width: 100%; /* Make the iframe fill its container */
-        height: 1200px; /* You can adjust this as needed */
-        border: none; /* Removes the default border */
-        border-radius: 8px; /* Optional: matches the timer container's style */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Optional: adds a shadow like the timer */
-    }
-    .warning {
-        color: #d9534f;
-    }
-    .blink {
-        animation: blink-animation 1s steps(2, start) infinite;
-    }
-    @keyframes blink-animation {
-        to { visibility: hidden; }
-    }
-</style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(to bottom right, transparent 49%, #6a11cb 50%);
+        }
+        
+        .header h2 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-weight: 300;
+            font-size: 1rem;
+        }
+        
+        .content {
+            padding: 40px 30px 30px;
+        }
+        
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #555;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .welcome-text::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            border-radius: 3px;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15px;
+            color: #6a11cb;
+            font-size: 18px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+        
+        .input-group input:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 10px rgba(106, 17, 203, 0.2);
+            outline: none;
+            background: #fff;
+        }
+        
+        button {
+            width: 100%;
+            background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+            font-size: 14px;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-right: 3px solid #e74c3c;
+        }
+        
+        .decoration {
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .decoration-1 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(120deg, rgba(106, 17, 203, 0.2) 0%, rgba(37, 117, 252, 0.2) 100%);
+            border-radius: 50%;
+            top: -50px;
+            left: -50px;
+        }
+        
+        .decoration-2 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(120deg, rgba(37, 117, 252, 0.2) 0%, rgba(106, 17, 203, 0.2) 100%);
+            border-radius: 50%;
+            bottom: -30px;
+            right: -30px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                max-width: 90%;
+            }
+            
+            .content {
+                padding: 30px 20px 20px;
+            }
+            
+            .header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-   <div id="timer-container">
-    <h2>زمان باقیمانده:</h2>
-    <div id="timer">30:00</div>
-    <p class="warning">این فرم به طور خودکار پس از اتمام زمان ارسال می‌شود. پاسخ‌های خود را به طور منظم ذخیره کنید!</p>
-</div>
-
-    <div id="form-container">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfQ_zsnlHjInuheWmZYmKnUhwqIC0v02BJqCluoD-slmum-ng/viewform?embedded=true" width="640" height="1724" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        <!-- Example of what your code looks like: -->
-        <!-- <iframe src="https://docs.google.com/forms/d/e/.../viewform?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
+    <div class="decoration decoration-1"></div>
+    <div class="decoration decoration-2"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h2>سامانه آزمون آنلاین</h2>
+            <p>پلتفرم پیشرفته برگزاری آزمون‌های آموزشی</p>
+        </div>
+        
+        <div class="content">
+            <div class="welcome-text">
+                <p>لطفاً نام و نام خانوادگی خود را وارد نمایید</p>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="firstName" placeholder="نام">
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-users"></i>
+                <input type="text" id="lastName" placeholder="نام خانوادگی">
+            </div>
+            
+            <button onclick="startExam()">شروع آزمون</button>
+            
+            <p id="errorMessage" class="error">
+                <i class="fas fa-exclamation-circle"></i>
+                لطفاً نام و نام خانوادگی خود را وارد کنید.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>کلیه حقوق محفوظ است © ۱۴۰۲</p>
+        </div>
     </div>
 
     <script>
-        // Total time for the exam in minutes
-        const totalTimeInMinutes = 60; // <-- CHANGE THIS TO YOUR DESIRED TIME
-        let timeLeft = totalTimeInMinutes * 60; // Convert to seconds
+        function startExam() {
+            let firstName = document.getElementById('firstName').value.trim();
+            let lastName = document.getElementById('lastName').value.trim();
 
-        const timerElement = document.getElementById('timer');
-        const formContainer = document.getElementById('form-container');
-        const timerContainer = document.getElementById('timer-container');
-
-        // Function to update the timer display
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            let seconds = timeLeft % 60;
-
-            // Add a leading zero to seconds if less than 10
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-            timerElement.textContent = `${minutes}:${seconds}`;
-
-            // Logic for when time is up
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                timerElement.textContent = "TIME IS UP!";
-                timerElement.classList.add('blink');
-                alert("Time is up! The form will now submit.");
-                // Find the Google Form iframe and submit it
-                const formFrame = document.querySelector('iframe');
-                if (formFrame) {
-                    formFrame.contentWindow.document.querySelector('form').submit();
+            if (firstName === "" || lastName === "") {
+                document.getElementById('errorMessage').style.display = 'block';
+                
+                // Add animation to highlight empty fields
+                if(firstName === "") {
+                    document.getElementById('firstName').style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        document.getElementById('firstName').style.animation = "";
+                    }, 500);
                 }
-            } else if (timeLeft <= 60) { // Warning for last minute
-                timerElement.style.color = '#ff0000'; // Bright red
-            } else if (timeLeft <= 300) { // Warning for last 5 minutes
-                timerElement.style.color = '#ff8c00'; // Orange
+                
+                if(lastName === "") {
+                    document.getElementById('lastName').style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        document.getElementById('lastName').style.animation = "";
+                    }, 500);
+                }
+            } else {
+                document.getElementById('errorMessage').style.display = 'none';
+                localStorage.setItem('firstName', firstName);
+                localStorage.setItem('lastName', lastName);
+                
+                // Show success message before redirecting
+                alert(`خوش آمدید ${firstName} ${lastName}! در حال انتقال به صفحه آزمون...`);
+                window.location.href = "exam-page.html";
             }
-            timeLeft--; // Decrement the time left
         }
-
-        // Start the timer interval (runs every second)
-        const timerInterval = setInterval(updateTimer, 1000);
-
-        // Initial call to display the timer immediately
-        updateTimer();
+        
+        // Add keypress event to allow submitting with Enter key
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                startExam();
+            }
+        });
+        
+        // Add shake animation for error
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes shake {
+                0% { transform: translateX(0); }
+                20% { transform: translateX(-10px); }
+                40% { transform: translateX(10px); }
+                60% { transform: translateX(-10px); }
+                80% { transform: translateX(10px); }
+                100% { transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
